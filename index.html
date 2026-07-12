@@ -121,7 +121,6 @@
         .hero-image-wrapper::after { content: ''; position: absolute; inset: 0; border-radius: 30px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2); pointer-events: none; }
         .profile-img { width: 100%; height: 600px; object-fit: cover; display: block; }
 
-        /* --- O MNĚ (LEVITUJÍCÍ PNG) --- */
         .floating-image-wrapper { display: flex; justify-content: center; align-items: center; position: relative; }
         .floating-img { 
             width: 100%; 
@@ -130,8 +129,6 @@
             object-fit: contain; 
             filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15)); 
             transition: filter 0.4s ease; 
-            
-            /* Plynulý přechod do ztracena (od 90% výšky do 100% výšky zprůhlední) */
             -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
             mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
         }
@@ -154,59 +151,34 @@
         .card p { color: var(--text-muted); font-weight: 300; }
 
         /* --- 7. NEKONEČNÝ KARUSEL (RECENZE) --- */
-        .carousel-container {
-            width: 100%; overflow: hidden; padding: 15px 0;
-        }
-        
-        .carousel-track {
-            display: flex;
-            will-change: transform;
-        }
-
-        .carousel-slide {
-            flex: 0 0 33.3333%;
-            padding: 0 15px; box-sizing: border-box; display: flex;
-        }
+        .carousel-container { width: 100%; overflow: hidden; padding: 15px 0; }
+        .carousel-track { display: flex; will-change: transform; }
+        .carousel-slide { flex: 0 0 33.3333%; padding: 0 15px; box-sizing: border-box; display: flex; }
 
         .review-card { 
             background: var(--bg-main); padding: 40px; border-radius: 24px; border: 1px solid var(--border); 
             box-shadow: var(--shadow-subtle); display: flex; flex-direction: column; gap: 20px; 
-            transition: border-color 0.3s ease, box-shadow 0.3s ease; width: 100%;
-            cursor: default;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease; width: 100%; cursor: default;
         }
-        
         .review-card.is-truncatable { cursor: pointer; } 
-        
         .review-card:hover { 
             border-color: var(--accent); 
             box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1), 0 0 15px rgba(212, 175, 55, 0.15);
         }
-        
-        [data-theme="dark"] .review-card:hover {
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6), 0 0 15px rgba(212, 175, 55, 0.15);
-        }
+        [data-theme="dark"] .review-card:hover { box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6), 0 0 15px rgba(212, 175, 55, 0.15); }
         
         .stars { color: var(--accent); font-size: 1.2rem; letter-spacing: 3px; }
-        
         .review-text-wrapper { flex-grow: 1; display: flex; flex-direction: column; }
-        
-        .review-text { 
-            font-style: italic; color: var(--text-muted); font-weight: 300; line-height: 1.7;
-            display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; 
-        }
-        
+        .review-text { font-style: italic; color: var(--text-muted); font-weight: 300; line-height: 1.7; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
         .review-author { font-weight: 700; border-top: 1px solid var(--border); padding-top: 20px; margin-top: auto; }
         
-        .expand-hint {
-            color: var(--accent); font-size: 0.9rem; font-weight: 500; margin-top: 10px;
-            opacity: 0.6; transition: opacity 0.3s; display: none;
-        }
+        .expand-hint { color: var(--accent); font-size: 0.9rem; font-weight: 500; margin-top: 10px; opacity: 0.6; transition: opacity 0.3s; display: none; }
         .review-card.is-truncatable .expand-hint { display: inline-block; }
         .review-card.is-truncatable:hover .expand-hint { opacity: 1; }
         .review-card.expanded .review-text { -webkit-line-clamp: initial; }
         .review-card.expanded .expand-hint { display: none; }
 
-        /* --- 8. KONTAKT & FORMULÁŘ --- */
+        /* --- 8. KONTAKT, FORMULÁŘ A MAPA --- */
         .contact-box { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 30px; padding: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; box-shadow: var(--shadow-subtle); }
         .form-group { margin-bottom: 25px; }
         input, textarea { width: 100%; padding: 16px 24px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 16px; color: var(--text-main); font-family: inherit; font-size: 1rem; transition: all 0.3s ease; }
@@ -221,6 +193,22 @@
         .checkbox-group input[type="checkbox"] { width: auto; margin-top: 4px; accent-color: var(--accent); cursor: pointer; }
         .privacy-link { color: var(--text-main); text-decoration: underline; text-decoration-color: var(--accent); cursor: pointer; transition: color 0.3s ease; }
         .privacy-link:hover { color: var(--accent); }
+
+        /* Styly pro responzivní mapu */
+        .iframe-container {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            display: block;
+            line-height: 0;
+            margin-top: 15px;
+        }
+        .iframe-container iframe {
+            width: 100%;
+            height: 250px;
+            border: none;
+            display: block;
+        }
 
         footer { text-align: center; padding: 40px; color: var(--text-muted); font-weight: 300; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 10px; align-items: center; }
 
@@ -428,28 +416,36 @@
         <section id="kontakt" class="section">
             <div class="contact-box reveal">
                 <div class="contact-info">
-                    <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Kontaktujte mě</h2>
-                    <p style="color: var(--text-muted); margin-bottom: 40px; font-weight: 300;">Nechte mi zprávu nebo si rovnou rezervujte termín online schůzky. Odpovím vám co nejdříve.</p>
+                    <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Kontaktujte mě</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 20px; font-weight: 300;">Nechte mi zprávu nebo si rovnou rezervujte termín online schůzky. Odpovím vám co nejdříve.</p>
                     
-                    <div style="margin-bottom: 20px;">
+                    <div style="margin-bottom: 10px;">
                         <strong>Email</strong><br>
                         <a href="mailto:info@danielkunst.cz" class="contact-link">info@danielkunst.cz</a>
                     </div>
-                    <div>
+                    <div style="margin-bottom: 10px;">
                         <strong>Telefon</strong><br>
                         <a href="tel:+420731018332" class="contact-link">+420 731 018 332</a>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <strong>Adresa</strong><br>
+                        <a href="https://maps.app.goo.gl/gxZqumMVDwa9Y4Rf6" class="contact-link" target="_blank" rel="noopener noreferrer">Třída Míru 92, Pardubice</a>
+                    </div>
+                    <!-- Obal pro responzivní mapu -->
+                    <div class="iframe-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2562.6298851700085!2d15.771927500000002!3d50.037030699999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470dcdeba09f4699%3A0x54e3b0a73a7ec5fc!2sDaniel%20Kunst!5e0!3m2!1scs!2scz!4v1783869555374!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>  
                     </div>
                 </div>
                 
                 <form class="contact-form" onsubmit="event.preventDefault(); alert('Formulář je připraven na napojení do PHP/WordPressu.');">
                     <div class="form-group">
-                        <input type="text" placeholder="Celé jméno" required>
+                        <input type="text" placeholder="Jméno a příjmení" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Pracovní e-mail" required>
+                        <input type="email" placeholder="Váš e-mail" required>
                     </div>
                     <div class="form-group">
-                        <textarea rows="4" placeholder="Jak vám mohu pomoci?" required></textarea>
+                        <textarea rows="12" placeholder="Jak vám mohu pomoci?" required></textarea>
                     </div>
                     
                     <div class="checkbox-group">
